@@ -1,0 +1,1 @@
+add ROM image of Dragon Slayer 2 in this folder.  It can be named anything you want.
