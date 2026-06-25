@@ -14,7 +14,7 @@
    
 ## Prerequisites
 
-   The Python scripts require at least 3.13 to run.
+   The Python scripts require at least Python 3.13 to run.
 
    You must also have a legally acquired ROM image of the Legend of Heroes II ROM for Genesis:
 
@@ -43,7 +43,9 @@
    5. Finally, patch the assembly: `python3 insert_asm.py modded_dslayer2_work.bin ref/asm1.bin ref/asm2.bin`
 
 This is rather a lot to keep track of, so I've provided an orchestration script that goes through all this for you.  I recommend using `clean.sh` as well to reset your working environment to a working initial state.  However you are probably going to want to stick to Steps 1-3 for a while.
-      
+
+All C++ source from the original toolset is included under `c_src` for convenient reference in the likely case problems crop up.
+
 ## Limitations
 
 It is important to note that the ROMhacking toolset was clearly left incomplete: most notable is the lack of a batch script to dump the bitmap data, which I am guessing includes a rather large amount of text that scrolls as part of the introduction to the game (you will get very, VERY tired of the long cutscenes before script data starts displaying).  The ROMhacking toolset does include a font (un)packer that I didn't bother to port because it appears very simple, and easy to port down the road.
@@ -52,6 +54,3 @@ I did compare the behavior of these ported tools to their Windows originals and 
 
 I have not done any analysis on whether/how data for non-dialogue, such as shop items and interfaces, is included in the script files.  
    
-## Credits
-
-Obviously a huge thank-you to whoever put these tools together in 2007.  Without their work it would be impossible to even be thinking about resuming efforts to patch this game now.  I would also like to thank Steve Monaco for allowing me to host a Python port of a (very ancient version) of his code.  
