@@ -58,11 +58,11 @@ I have not done any analysis on whether/how data for non-dialogue, such as shop 
 
 This is an area for me to jot down blog-ish notes since I'm too cheap to pay GH for a proper wiki or to host my own. :-) 
 
+I should preface what follows with a warning that I have only a basic knowledge of assembly language and even less knowledge of the low-level Genesis internals.  So take everything below with an appropriately small grain of salt.
+
 ### July 13 2026
 
 While translation of the game's main script data seems to be handled nicely by Atlas and the other scripts from the original hacker, I still haven't quite worked out how to unpack and modify the sprite data for the Japanese text on the title screen, and even worse the several screens' worth of intro story data before the game is actually playable.  To that end,  I've spent a few weeks working in [Ghidra](https://github.com/nationalsecurityagency/ghidra) (with the excellent Genesis ROM [plugin](https://github.com/lab313ru/ghidra_sega_ldr)) and [Exodus](https://github.com/RogerSanders/Exodus) to suss out where this sprite data lives and how to unpack it.  It's been slow going, to put it mildly.
-
-I should preface what follows with a warning that I have only a basic knowledge of assembly language and even less knowledge of the low-level Genesis internals.  So take whatever follows with an appropriately small grain of salt.
 
 Based on stepping through the "starfield" scene (setting a breakpoint at $D3D2 in particular is nice since that appears to be the VBLANK interrupt handler, and lets you basically step forward in the game frame-by-frame) and studying when the sprite data is written into VRAM, and then tracing backward through the execution, my best current guess is the sprites are unpacked according to the following flow:
 
