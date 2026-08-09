@@ -56,7 +56,7 @@ I have not done any analysis on whether/how data for non-dialogue, such as shop 
    
 ## Blog (of Sorts)
 
-This is an area for me to jot down blog-ish notes since I'm too cheap to pay GH for a proper wiki or to host my own. :-) 
+This is an area for me to jot down blog-ish notes since I'm too cheap to pay GH for a proper wiki or to host my own. :-)
 
 ### July 13 2026
 
@@ -72,3 +72,25 @@ Basically, it looks like a set of mask patterns, stored as static values beginni
 
 However as anyone who's dealt with assmembly knows, stepping through is painfully tedious.  I was therefore quite happy to discover a few days ago that [someone has written](https://github.com/sadnescity/exodus-mcp-extension) a Model Context Protocol (MCP) Server for Exodus.  I currently don't have much interest in pairing this MCP with an AI assistant, but I am most definitely interested in repurposing the MCP so that I can automate the tedious execution loops, logging pertinent information all the while since I'll inevitably run right past interesting areas such as VRAM writes of uncompressed sprite data.  To this end, I've ginned up a small fastapi service, `exds_fastapi.py`, which will format the largely unstructured text output of the MCP back into structured JSON/Python objects that will be easier to integrate into scripts.  I look forward to setting up this automation after a few days' break and digging deeper into how the sprite data is being unpacked and displayed. 
 
+### Aug 9 2026
+
+Had a chance to resume work finally, and the MCP bridge is definitely helping to speed things up.  Based on some looped checks of $A5 with a breakpoint set on $BD54, it looks like sprite data for at least the first line of data is read from the following blocks of compressed data:
+
+```text
+f88a3  - f88d9
+100b02 - 100b39
+f752a  - f7561
+f783a  - f7871
+f7e22  - f7e59
+f514a  - f5181
+f79fa  - f7a31
+f8362  - f8399
+f6532  - f6569
+10402a - 104061
+f672a  - f6761
+f7332  - f7369
+f4ffa  - f5031
+108eee - 108f09 (text is rendered at some point)
+```
+
+It seems unlikely that all of this data is just for the first line; more likely at least a screen's worth of sprite data is being unpacked/loaded at a time.
