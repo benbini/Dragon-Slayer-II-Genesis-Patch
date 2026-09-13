@@ -48,6 +48,11 @@ All C++ source from the original toolset is included under `c_src` for convenien
 
 ## Limitations
 
+The intro font renderer and the glyph addresses recorded below are now documented in
+[Font rendering and replacement](docs/font-rendering.md), with a PNG export/insertion
+utility, `font_tiles.py`. The traced data consists of raw foreground/outline masks;
+the report also locates the first intro text line at ROM offset `$17910`.
+
 It is important to note that the Romhacking toolset was clearly left incomplete: most notable is the lack of a batch script to dump tile (font?) data for the rather large amount of text that scrolls as part of the introduction to the game (you will get very, VERY tired of the long cutscenes before script data starts displaying).  These tiles do not appear to be contained in the font data as dumped by original or python-ported version of the font dumper and finding these tiles is my focus for the time being.  If someone with more expertise in low-level Genesis architecture than me wants to provide assistance in this search it would be very welcome.
 
 I did compare the behavior of these ported tools to their Windows originals and was able to verify, via hash checks, that behavior through and including Step 3, `insert_text`, is identical across environments.  Modifying and compressing the `bin` images in Step 4 also appears to mirror the Windows process exactly, however the resultant ROM images currently diverge slightly for as-yet unknown reasons.  It is unknown whether this divergence might introduce problems at some point, but it does not appear to affect the rendering of inserted text.
